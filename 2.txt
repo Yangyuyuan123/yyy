@@ -1,0 +1,78 @@
+import【1】 as ts #导入数据接口            
+import pandas as pd             
+api='41addd8c3955aea5623099855def5d5ae794632258ad289d8fd02fb6'             
+pro = ts.pro_api()             
+df1 = pro.fina_indicator(ts_code='300750.SZ',period='20221231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+df2 = pro.fina_indicator(ts_code='300014.SZ',period='20211231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+df3 = pro.fina_indicator(ts_code='002640.SZ',period='20211231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+# 修改列名             
+new_columns = {'ts_code': '证券代码','grossprofit_margin': '销售毛利率','profit_to_op': '营业利润率','roa': '总资产报酬率'}
+df1=df1.drop(1, axis=0)       
+df1= df1.rename(columns=new_columns)       
+df2= df2.rename(columns=new_columns)       
+df3= df3.rename(columns=new_columns)       
+df= pd.concat([df1, df2, df3], axis=0)       
+# df.to_excel('st4ywglgrw9.xlsx')       
+# print(df1)       
+# df['证券代码'], df['销售毛利率'], df['总资产报酬率'], df['营业利润率']       
+import matplotlib.pyplot as plt            
+plt.rcParams['font.sans-serif'] = ['【2】']  # 设置中文使用的字体       
+# 创建 DataFrame       
+df.set_index('证券代码', inplace=True)       
+x = df.index.values       
+# 绘制柱状图       
+df.plot(kind='bar', rot=0)       
+# 添加标题和标签       
+plt.title('公司财务指标')       
+plt.xlabel('公司名称')       
+plt.ylabel('数值')       
+# 显示图像       
+plt.【3】('aa.png')
+
+
+
+
+
+
+
+
+
+
+
+
+答案
+【1】=tu_share
+【2】=SimHei
+【3】=savefig
+import tushare as ts             
+import pandas as pd             
+api='41addd8c3955aea5623099855def5d5ae794632258ad289d8fd02fb6'             
+pro = ts.pro_api()             
+df1 = pro.fina_indicator(ts_code='300750.SZ',period='20221231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+df2 = pro.fina_indicator(ts_code='300014.SZ',period='20211231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+df3 = pro.fina_indicator(ts_code='002640.SZ',period='20211231',fields='ts_code,grossprofit_margin,profit_to_op,roa')             
+# 修改列名             
+new_columns = {'ts_code': '证券代码','grossprofit_margin': '销售毛利率','profit_to_op': '营业利润率','roa': '总资产报酬率'}
+df1=df1.drop(1, axis=0)       
+df1= df1.rename(columns=new_columns)       
+df2= df2.rename(columns=new_columns)       
+df3= df3.rename(columns=new_columns)       
+df= pd.concat([df1, df2, df3], axis=0)       
+# df.to_excel('st4ywglgrw9.xlsx')       
+# print(df1)       
+# df['证券代码'], df['销售毛利率'], df['总资产报酬率'], df['营业利润率']       
+import matplotlib.pyplot as plt       
+# 设置默认字体       
+plt.rcParams['font.family'] = 'sans-serif'  # 设置全局默认字体       
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 设置中文使用的字体       
+# 创建 DataFrame       
+df.set_index('证券代码', inplace=True)       
+x = df.index.values       
+# 绘制柱状图       
+df.plot(kind='bar', rot=0)       
+# 添加标题和标签       
+plt.title('公司财务指标')       
+plt.xlabel('公司名称')       
+plt.ylabel('数值')       
+# 显示图像       
+plt.savefig('aa.png')
